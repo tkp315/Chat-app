@@ -14,14 +14,15 @@ import ApiError from "../utils/apiError.js";
 const sendMessage = asyncHandlerFunction(async(req,res)=>{
     const {content,timeToSend}=req.body;
     const {chatId}= req.params;
-    console.log(chatId);
+    
+    console.log("This is chat id",chatId);
     const senderId = req.user._id;
     const cid = new mongoose.Types.ObjectId(chatId);
     console.log(content)
     
    if(timeToSend && timeToSend<Date.now())throw new ApiError(401,"You entered past time")
    const status = timeToSend>Date.now()?"Pending":"Sent"
-   console.log(timeToSend)
+   console.log("Time to send",timeToSend)
     const createNewMessage = await Messages.create({
         sender:senderId,
         content:content,
