@@ -15,7 +15,7 @@ connectToDB().then(()=>{
         try {
           const io = new Server(server, {
             cors: {
-              origin: 'https://chat-app-1-vrhe.onrender.com',
+              origin: [process.env.CORS_ORIGIN],
               credentials: true
             }
           });
