@@ -6,9 +6,8 @@ import asyncHandlerFunction from "../utils/asyncHandler.js";
 import { Messages } from "../models/message.model.js";
 import { Chat } from "../models/chat.model.js";
 import ApiResponse from "../utils/apiResponse.js";
-import cron, { schedule } from 'node-cron'
 import ApiError from "../utils/apiError.js";
-import { populate } from "dotenv";
+
 
 
 
