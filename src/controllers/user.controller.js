@@ -16,7 +16,6 @@ import { OTP } from "../models/otp.model.js";
 import { otpGenerator } from "../utils/generateOTP.js";
 import { User } from "../models/user.model.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
-import { BsThreads } from "react-icons/bs";
 import { sendMail } from '../utils/mailSetup.js';
 
 
