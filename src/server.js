@@ -15,7 +15,7 @@ connectToDB().then(()=>{
         try {
             const io = new Server(server,{
                 cors:{
-                    origin:'https://66dd93e65363bf324d26732f--connectwithworld.netlify.app',
+                    origin:'https://connectwithworld.netlify.app',
                     credentials:true
                 }
             })
