@@ -13,7 +13,8 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js";
 const createChat = asyncHandlerFunction(async (req, res) => {
     const { receiverId } = req.body; 
     const userId = req.user._id;
-
+    const user = await User.findById(userId)
+    const username = user.fullName
     // Check if there's already a single chat between the two users
     const existingSingleChat = await Chat.findOne({
         isGroupChat: false,
@@ -31,10 +32,10 @@ const createChat = asyncHandlerFunction(async (req, res) => {
 
     const receiver = await User.findById(receiverId);
     const nameOfReceiver = receiver.fullName
-
+    console.log(nameOfReceiver)
     // Create a new chat if it doesn't exist
     const newChat = await Chat.create({
-        chatName: nameOfReceiver,
+        chatName: userId!==receiverId?nameOfReceiver:username,
         isGroupChat: false,
         groupMembers: [receiverId, userId],
         sender: userId
