@@ -12,10 +12,12 @@ connectToDB().then(()=>{
 
     const server =app.listen(port,()=>{
         console.log(`Server is running on ${port}`)
+        
         try {
             const io = new Server(server,{
                 cors:{
-                    origin:'https://66dd93e65363bf324d26732f--connectwithworld.netlify.app',
+                    // origin:'http://localhost:5173',
+                    origin:'https://connectwithworld.netlify.app',
                     credentials:true
                 }
             })
@@ -40,7 +42,26 @@ connectToDB().then(()=>{
                     
                 })
     
-                //
+                /* **********video-call************************* */
+                // 1. call to ,send video call offer 2.accept offer(receiver) 3. end call 4. // ice-candidates
+                 socket.on('video_call_offer',(data)=>{
+                   const {offer,recieverId,callerId}=data;
+                   socket.to(recieverId).emit('video_call_offer',{from:callerId ,offer})
+                 })
+
+                 socket.on('video_call_answer',(data)=>{
+                   const {answer,callerId}=data;
+
+                   socket.to(callerId).emit('video_call_answer',{to:callerId,answer});
+                 })
+                
+                 socket.on('ice-candidate', (data) => {
+                    const { candidate, peerId } = data;
+                    socket.to(peerId).emit('ice-candidate', { candidate });
+                });
+
+
+
                 socket.on('new_message',(newMessageReceived)=>{
                     const chat = newMessageReceived.chat;
                     if(newMessageReceived)console.log("There is no message")

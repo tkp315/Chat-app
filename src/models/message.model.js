@@ -13,16 +13,16 @@ const messageSchema = new Schema(
     },
     timeToSend: {
         type: Date,
-        default: Date.now // Corrected: Removed parentheses
+        default: Date.now 
     },
     sentTime: {
         type: Date,
-        default: Date.now // Corrected: Removed parentheses
+        default: Date.now 
     },
     status: {
         type: String,
         enum: ["Sent", "Pending", "failed"],
-        default: "pending" // Optional: Set a default value
+        default: "pending" 
     },
     chat: {
         type: mongoose.Schema.Types.ObjectId,

@@ -11,18 +11,18 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js";
 2.extract all the messages 
  */
 const createChat = asyncHandlerFunction(async (req, res) => {
-    const { receiverId } = req.body;  // Corrected spelling
+    const { receiverId } = req.body; 
     const userId = req.user._id;
 
     // Check if there's already a single chat between the two users
     const existingSingleChat = await Chat.findOne({
         isGroupChat: false,
         groupMembers: {
-            $all: [userId, receiverId]  // Removed unnecessary ObjectId conversion
+            $all: [userId, receiverId]  
         }
     })
     .populate("latestMessage", "content sentTime")
-    .populate("groupMembers", "fullName email avatar")  // Corrected spacing in field selection
+    .populate("groupMembers", "fullName email avatar")  
     .populate("sender", "fullName email avatar");
 
     if (existingSingleChat) {
@@ -72,7 +72,7 @@ const fetchAllChats = asyncHandlerFunction(async (req, res) => {
       .populate("latestMessage","content sentTime")
       .sort({ updatedAt: -1 });
   
-    // Further populate latestMessage sender
+    
     allChats = await User.populate(allChats, {
       path: "latestMessage.sender",
       select: "name avatar phone",

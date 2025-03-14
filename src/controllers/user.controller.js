@@ -32,7 +32,7 @@ const sendOTP = asyncHandlerFunction(async(req,res)=>{
         otp:uniqueOTP,
         expiryIn:Date.now()+10*60*1000
     })
-    
+    console.log(newOTP.otp)
    return res.status(200)
    .json(new ApiResponse(200,{newOTP},"OTP sent successfully"))
 })
