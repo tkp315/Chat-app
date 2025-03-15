@@ -33,9 +33,12 @@ const createChat = asyncHandlerFunction(async (req, res) => {
     const receiver = await User.findById(receiverId);
     const nameOfReceiver = receiver.fullName
     console.log(nameOfReceiver)
-    // Create a new chat if it doesn't exist
+    
     const newChat = await Chat.create({
-        chatName: userId!==receiverId?nameOfReceiver:username,
+        chatNames:{
+          [userId]: receiver.fullName, 
+          [receiverId]: user.fullName
+        } ,
         isGroupChat: false,
         groupMembers: [receiverId, userId],
         sender: userId

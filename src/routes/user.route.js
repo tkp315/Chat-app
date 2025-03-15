@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { changeDP, logout, resetPassword, sendOTP, sendToken, signup,login, userInfo, makeFriend} from "../controllers/user.controller.js";
+import { changeDP, logout, resetPassword, sendOTP, sendToken, signup,login, userInfo, makeFriend, fetchAllUser} from "../controllers/user.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 import { upload } from "../middlewares/multer.js";
 
@@ -10,6 +10,7 @@ userRouter.route("/signup").post(upload.single("avatar"),signup)
 userRouter.route("/login").post(login)
 userRouter.route("/logout").post(verifyJWT,logout)
 userRouter.route("/send-reset-token").post(sendToken)
+userRouter.route('/fetch-all-users').get(verifyJWT,fetchAllUser)
 
 userRouter.route("/reset-password").post(resetPassword)
 

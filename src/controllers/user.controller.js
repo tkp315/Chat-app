@@ -177,7 +177,21 @@ const makeFriend = asyncHandlerFunction(async (req, res) => {
       .json(new ApiResponse(200, { friend,friendData}, "New friend added"));
   });
 
+const fetchAllUser = asyncHandlerFunction(async(req,res)=>{
+    
+    const userId = req.user._id
+    const allUsers = await User.find({
+        _id: { $ne: userId }  
+      });
+      
+    if(allUsers.length===0){
+        throw new ApiError(404, "Users not found")
+    }
 
+    return res
+    .status(200)
+    .json(new ApiResponse(200, allUsers,"Successfully fetched all users"))
+})
 // reset password
 
 const sendToken=asyncHandlerFunction(async(req,res)=>{
@@ -242,6 +256,7 @@ const changeDP = asyncHandlerFunction(async(req,res)=>{
 export {
     sendOTP,
     signup,
+    fetchAllUser,
     login,
     logout,
     sendToken,

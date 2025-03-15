@@ -2,9 +2,13 @@ import mongoose, { Schema } from "mongoose";
 
 const chatSchema = new Schema(
 {
+chatNames:{
+    type:Map,
+    of:String
+},
 chatName:{
     type:String,
-    required:true
+    // required:true
 },
 isGroupChat:{
     type:Boolean,

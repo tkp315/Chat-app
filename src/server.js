@@ -29,9 +29,6 @@ connectToDB().then(()=>{
                  socket.emit('connection')
                  userId=userData._id
                  io.emit('user_online',isOnline(userId,true,null))
-
-                 
-                
                 })
     
                 // joining a chat 
@@ -62,10 +59,12 @@ connectToDB().then(()=>{
 
 
 
+
                 socket.on('new_message',(newMessageReceived)=>{
                     const chat = newMessageReceived.chat;
                     if(newMessageReceived)console.log("There is no message")
-                    if(chat.groupMembers.length===0)return console.log("no members inside it");
+                    if(chat.groupMembers.length===0)return ;
+                    
                     console.log(newMessageReceived)
                    
                    
